@@ -4,19 +4,16 @@ import React, { useState } from 'react';
 import styles from './Carousel.module.css';
 
 interface CarouselProps {
-  images: string[
-    img
-    
-  ]; // Array of image URLs
+  images: string[]; // Array of image URLs
 }
 
 const Carousel: React.FC<CarouselProps> = ({ images }) => {
-  // Ensure that images has at least one image to avoid index out of bounds
+  // Check for empty images array inside the render, but don't return early before using useState
+  const [currentIndex, setCurrentIndex] = useState(0);
+
   if (!images || images.length === 0) {
     return <div>No images available</div>; // Fallback content
   }
-
-  const [currentIndex, setCurrentIndex] = useState(0);
 
   const nextSlide = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);

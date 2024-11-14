@@ -22,7 +22,7 @@ const Home: React.FC = () => {
       <Header />
       <Navbar />
       <Banner />
-      <Carousel images={images} /> {/* Carousel Component */}
+      <Carousel images={images} />
       <CardSection />
       <Footer />
     </>
