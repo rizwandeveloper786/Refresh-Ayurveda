@@ -1,0 +1,58 @@
+/* Banner Section */
+.banner-section {
+    padding: 60px 0;
+    text-align: center;
+    background-color: #f4f4f4;
+  }
+  
+  /* Container for the carousel */
+  .banner-container {
+    position: relative;
+    margin: 0 auto;
+    max-width: 1200px;
+  }
+  
+  /* Styling for slick image */
+  .slick-image {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Caption Style */
+  .slick-caption {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .slick-caption h4 {
+    font-size: 20px;
+    margin: 0;
+  }
+  
+  .slick-icons {
+    vertical-align: middle;
+    margin-right: 10px;
+  }
+  
+  /* Add hover effect to slick images */
+  .slick-image:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  /* MUI Card styling */
+  .card-content {
+    padding: 0;
+  }
+  
