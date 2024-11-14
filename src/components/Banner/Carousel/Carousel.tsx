@@ -1,42 +1,49 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import styles from "./Carousel.module.css";
+import React, { useState } from 'react';
+import styles from './Carousel.module.css';
 
+interface CarouselProps {
+  images: string[
+    img
+    
+  ]; // Array of image URLs
+}
 
+const Carousel: React.FC<CarouselProps> = ({ images }) => {
+  // Ensure that images has at least one image to avoid index out of bounds
+  if (!images || images.length === 0) {
+    return <div>No images available</div>; // Fallback content
+  }
 
-const Carousel = ({ slides }: any) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const handlePrev = () => {
+  const nextSlide = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+  };
+
+  const prevSlide = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? slides.length - 1 : prevIndex - 1
+      prevIndex === 0 ? images.length - 1 : prevIndex - 1
     );
   };
 
-  const handleNext = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === slides.length - 1 ? 0 : prevIndex + 1
-    );
-  };
   return (
     <div className={styles.carousel}>
-      <div
-        className={styles.carouselInner}
-        style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-      >
-        
-        {slides.map((slide, index) => (
-          <div key={index} className={styles.carouselItem}>
-            <img src={slide} alt={`Slide ${index + 1}`} />
-          </div>
-        ))}
-      </div>
-      <button className={styles.prevButton} onClick={handlePrev}>
-        ❮
+      <button className={styles.prev} onClick={prevSlide}>
+        &#10094;
       </button>
-      <button className={styles.nextButton} onClick={handleNext}>
-        ❯
+
+      <div className={styles.carouselImageWrapper}>
+        <img
+          src={images[currentIndex]} // Ensure there is always an image in the array
+          alt="carousel image"
+          className={styles.carouselImage}
+        />
+      </div>
+
+      <button className={styles.next} onClick={nextSlide}>
+        &#10095;
       </button>
     </div>
   );
