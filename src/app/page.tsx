@@ -5,9 +5,14 @@ import CardSection from '../components/CardSection';
 import Footer from '../components/Footer/Footer';
 import Header from '../components/Header/Header';
 import Navbar from '@/components/Navbar/Navbar';
-import CarouselComponent from '@/components/Banner/Carousel/Carousel';
+import Carousel from '@/components/Banner/Carousel/Carousel';
 
 const Home: React.FC = () => {
+  const slides = [
+    "/images/slide1.jpg",
+    "/images/slide2.jpg",
+    "/images/slide3.jpg",
+  ];
   return (
     <>
       <Head>
@@ -17,7 +22,7 @@ const Home: React.FC = () => {
       <Header />
       <Navbar />
       <Banner />
-      <CarouselComponent /> {/* Carousel Component */}
+      <Carousel slides={slides} /> {/* Carousel Component */}
       <CardSection />
       <Footer />
     </>

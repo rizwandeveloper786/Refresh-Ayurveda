@@ -1,103 +1,42 @@
-// components/Carousel.tsx
+"use client";
 
-'use client'; // Make this a client-side component for React hooks
+import { useState } from "react";
+import styles from "./Carousel.module.css";
 
-import React, { useState, useEffect } from 'react';
-import Image from 'next/image'; // For optimized images
-import 'bootstrap/dist/js/bootstrap.bundle.min.js'; // Import Bootstrap JS
-import styles from './Carousel.module.css'; // Import custom CSS
 
-const Carousel: React.FC = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
 
-  useEffect(() => {
-    // Initialize the Bootstrap carousel if JS is needed
-    const carouselElement = document.getElementById('carouselExampleCaptions');
-    const carousel = new window.bootstrap.Carousel(carouselElement);
-  }, []);
+const Carousel = ({ slides }: any) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-  const carouselItems = [
-    {
-      src: '/images/slide1.jpg',
-      alt: 'First slide',
-      title: 'First slide label',
-      description: 'Some representative placeholder content for the first slide.',
-    },
-    {
-      src: '/images/slide2.jpg',
-      alt: 'Second slide',
-      title: 'Second slide label',
-      description: 'Some representative placeholder content for the second slide.',
-    },
-    {
-      src: '/images/slide3.jpg',
-      alt: 'Third slide',
-      title: 'Third slide label',
-      description: 'Some representative placeholder content for the third slide.',
-    },
-  ];
-
-  const handleSlideChange = (index: number) => {
-    setActiveIndex(index);
+  const handlePrev = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0 ? slides.length - 1 : prevIndex - 1
+    );
   };
 
+  const handleNext = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === slides.length - 1 ? 0 : prevIndex + 1
+    );
+  };
   return (
-    <div id="carouselExampleCaptions" className={`carousel slide ${styles.carouselWrapper}`}>
-      <div className="carousel-indicators">
-        {carouselItems.map((_, index) => (
-          <button
-            key={index}
-            type="button"
-            data-bs-target="#carouselExampleCaptions"
-            data-bs-slide-to={index}
-            className={activeIndex === index ? 'active' : ''}
-            aria-current={activeIndex === index ? 'true' : 'false'}
-            aria-label={`Slide ${index + 1}`}
-            onClick={() => handleSlideChange(index)}
-          ></button>
-        ))}
-      </div>
-
-      <div className="carousel-inner">
-        {carouselItems.map((item, index) => (
-          <div
-            key={index}
-            className={`carousel-item ${activeIndex === index ? 'active' : ''}`}
-          >
-            <Image
-              src={item.src}
-              alt={item.alt}
-              className="d-block w-100"
-              width={1200}
-              height={500}
-            />
-            <div className="carousel-caption d-none d-md-block">
-              <h5>{item.title}</h5>
-              <p>{item.description}</p>
-            </div>
+    <div className={styles.carousel}>
+      <div
+        className={styles.carouselInner}
+        style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+      >
+        
+        {slides.map((slide, index) => (
+          <div key={index} className={styles.carouselItem}>
+            <img src={slide} alt={`Slide ${index + 1}`} />
           </div>
         ))}
       </div>
-
-      <button
-        className="carousel-control-prev"
-        type="button"
-        data-bs-target="#carouselExampleCaptions"
-        data-bs-slide="prev"
-        onClick={() => handleSlideChange(activeIndex === 0 ? carouselItems.length - 1 : activeIndex - 1)}
-      >
-        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span className="visually-hidden">Previous</span>
+      <button className={styles.prevButton} onClick={handlePrev}>
+        ❮
       </button>
-      <button
-        className="carousel-control-next"
-        type="button"
-        data-bs-target="#carouselExampleCaptions"
-        data-bs-slide="next"
-        onClick={() => handleSlideChange(activeIndex === carouselItems.length - 1 ? 0 : activeIndex + 1)}
-      >
-        <span className="carousel-control-next-icon" aria-hidden="true"></span>
-        <span className="visually-hidden">Next</span>
+      <button className={styles.nextButton} onClick={handleNext}>
+        ❯
       </button>
     </div>
   );
