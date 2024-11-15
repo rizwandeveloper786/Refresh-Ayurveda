@@ -32,7 +32,7 @@ export default function RootLayout({
           rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
         />
-        
+
         {/* Favicon */}
         <link rel="icon" href="/images/favicon1.png" type="image/x-icon" />
         <title>Refresh Ayurveda</title>
