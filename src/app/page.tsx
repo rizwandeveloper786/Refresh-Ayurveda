@@ -12,7 +12,6 @@ const Home: React.FC = () => {
     '/images/slide2.jpg',
     '/images/slide3.jpg',
   ];
-
   return (
     <>
       <Head>

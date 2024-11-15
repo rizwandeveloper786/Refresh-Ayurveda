@@ -2,23 +2,27 @@
 
 import React, { useState } from 'react';
 import styles from './Carousel.module.css';
+import Image from 'next/image'; // Import Image from next/image
 
 interface CarouselProps {
   images: string[]; // Array of image URLs
 }
 
 const Carousel: React.FC<CarouselProps> = ({ images }) => {
-  // Check for empty images array inside the render, but don't return early before using useState
+  // React hook ko top level par call karein
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  // Agar images empty hain to fallback message dikhana
   if (!images || images.length === 0) {
-    return <div>No images available</div>; // Fallback content
+    return <div>No images available</div>; 
   }
 
+  // Agla slide dikhane ke liye
   const nextSlide = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
   };
 
+  // Pichla slide dikhane ke liye
   const prevSlide = () => {
     setCurrentIndex((prevIndex) =>
       prevIndex === 0 ? images.length - 1 : prevIndex - 1
@@ -28,19 +32,22 @@ const Carousel: React.FC<CarouselProps> = ({ images }) => {
   return (
     <div className={styles.carousel}>
       <button className={styles.prev} onClick={prevSlide}>
-        &#10094;
+        &#10094; {/* Left arrow */}
       </button>
 
       <div className={styles.carouselImageWrapper}>
-        <img
-          src={images[currentIndex]} // Ensure there is always an image in the array
+        <Image
+          src={images[currentIndex]} // Image path
           alt="carousel image"
+          layout="intrinsic" // You can also use "responsive" or "fill" based on the layout
+          width={600} // Image width
+          height={400} // Image height
           className={styles.carouselImage}
         />
       </div>
 
       <button className={styles.next} onClick={nextSlide}>
-        &#10095;
+        &#10095; {/* Right arrow */}
       </button>
     </div>
   );
