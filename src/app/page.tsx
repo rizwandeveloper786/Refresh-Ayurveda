@@ -15,7 +15,7 @@ const Home: React.FC = () => {
   return (
     <>
       <Head>
-        <title>My Website</title>
+        <title>Refresh Ayurveda</title>
         <meta name="description" content="A sample website created in Next.js with TypeScript" />
       </Head>
       <Header />
