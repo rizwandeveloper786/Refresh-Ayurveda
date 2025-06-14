@@ -7,7 +7,7 @@ const Navbar = () => {
   return (
     <nav className={styles.navbar}>
       <div className={styles.logo}>
-        <Link href="/">E-Commerce</Link>
+        <Link href="/" className='text-white'>ShifaVeda</Link>
       </div>
       <ul className={styles.navLinks}>
         <li className={styles.shopLink}>
